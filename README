@@ -1,0 +1,16 @@
+To run the pytest, use:
+pytest [options]
+
+Options:
+-v - verbose
+-x - stop on first fail
+-s - transfer console output to pytest output
+-k key_word - runs only files and tests with key_word in the name in the current directory and subdirectories
+file_name - specify file name to run all tests in the file
+-m 'mark_names expression' - to run cases with specified mark names. supports "not mark_name" and combinations
+
+Pytest file should start with test_ or end with _test
+Tests should start with test key word
+
+Annotations:
+@pytest.mark.[mark_name] - marks should be registered in pytest.ini file
