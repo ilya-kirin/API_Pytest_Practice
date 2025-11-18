@@ -1,0 +1,9 @@
+{
+  "urls": {
+    "https://jsonplaceholder.typicode.com": {"content_type": "text/html"},
+    "https://w3schools.com/python/demopage.htm": {"content_type": "text/html"},
+    "https://postman-echo.com/": {"content_type": "text/html"},
+    "https://api.github.com": {"content_type": "application/json"},
+    "https://dog.ceo/api/breeds/image/random": {"content_type": "application/json"}
+  }
+}

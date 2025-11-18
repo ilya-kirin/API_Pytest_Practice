@@ -9,8 +9,36 @@ Options:
 file_name - specify file name to run all tests in the file
 -m 'mark_names expression' - to run cases with specified mark names. supports "not mark_name" and combinations
 
-Pytest file should start with test_ or end with _test
-Tests should start with test key word
+Pytest file should start with 'test_' or end with '_test'
+Tests should start with 'test' key word
 
 Annotations:
 @pytest.mark.[mark_name] - marks should be registered in pytest.ini file
+Pytest built in marks:
+skip - to skip the test from the execution
+skipif - conditional tests skipping
+xfail - test where fail is expected. Used to mark the test suit as passed
+parametrize("par1, par2", [(v1, s1), (v2, s2)] - to run the same test against a set of parameters
+
+Fixtures:
+Fixture is a function that contains steps that are executed before and after the actual test case.
+e.g. Setup and teardown needed for the test:
+- establish and close connection
+- envoke the browser and clear out cookie files
+To define a fixture add @pytest.fixture() before function definition
+To add fixture to a test, add the name of the fixture to the test definition def test_name(fixture_name)
+Steps before yeild keyword are executed before the test, steps after yeild are executed after
+Fixtures defined in the test file are available for the tests in the file.
+Fixtures defined in conftest.py file are available to all tests in the directory and sub-directories.
+Several conftest files can be defined at different levels of the hierarchyof the project.
+Several fixtures could be added to the test def test_name(global_setup_teardown, local_setup_teardown)
+Each fixture will be executed in a specified sequence
+Fixture name shadowing (scope):
+
+Each conftest file makes all fixtures
+If the same fixture name is used in local files and several conftest files.
+Pytest follows upward rule in fixture definition:
+- local file
+- closest to test file conftest.py
+...
+- furthest to test file conftest.py
