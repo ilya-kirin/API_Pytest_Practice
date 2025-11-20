@@ -60,3 +60,7 @@ If multiple parameters should be passed, use List[Tuple(any,...)] structure
 Request should be passed as a parameter to the fixture
 Request.param should be returned. To access data in the test use fixture name
 e.g. get_raw_data fixture
+
+
+pytest.ini is a configuration file that stores settings and custom pytest parameters
+
