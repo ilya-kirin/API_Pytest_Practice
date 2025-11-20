@@ -10,6 +10,7 @@ file_name - specify file name to run all tests in the file
 -m 'mark_names expression' - to run cases with specified mark names. supports "not mark_name" and combinations
 
 Pytest file should start with 'test_' or end with '_test'
+Classes with tests should start with 'Test' keyword and follow usual camel case convention
 Tests should start with 'test' key word
 
 Annotations:
@@ -30,11 +31,11 @@ To add fixture to a test, add the name of the fixture to the test definition def
 Steps before yeild keyword are executed before the test, steps after yeild are executed after
 Fixtures defined in the test file are available for the tests in the file.
 Fixtures defined in conftest.py file are available to all tests in the directory and sub-directories.
-Several conftest files can be defined at different levels of the hierarchyof the project.
+Several conftest files can be defined at different levels of the hierarchy of the project.
 Several fixtures could be added to the test def test_name(global_setup_teardown, local_setup_teardown)
 Each fixture will be executed in a specified sequence
-Fixture name shadowing (scope):
 
+Fixture name shadowing and scope:
 Each conftest file makes all fixtures
 If the same fixture name is used in local files and several conftest files.
 Pytest follows upward rule in fixture definition:
@@ -42,3 +43,20 @@ Pytest follows upward rule in fixture definition:
 - closest to test file conftest.py
 ...
 - furthest to test file conftest.py
+
+Fixture can be defined for separate test or a set of tests within the class.
+Fixture can me defined as @pytest.fixture(scope='class'), then setup and teardown steps will be executed only once
+before the first test and after the last test from the class tests
+When assigning the fixtures on a class level @pytest.mark.usefixtures("class_setup_teardown") annotation should added to class definition
+
+Transferring data from fixtures to tests:
+To send data from fixture to test case fixture should contain return statement with data to pass in a list or tuple
+At the same time fixture name should be defined on the stest level itself even of the fixture is added on the class level
+e.g. data_load fixture
+
+Multiple test executions against datasets fed from the fixture:
+@pytest.fixture(params=['v1', 'v2', 'v3']) annotation should be used
+If multiple parameters should be passed, use List[Tuple(any,...)] structure
+Request should be passed as a parameter to the fixture
+Request.param should be returned. To access data in the test use fixture name
+e.g. get_raw_data fixture
